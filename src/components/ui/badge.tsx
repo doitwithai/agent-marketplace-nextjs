@@ -1,0 +1,1 @@
+export function Badge({children,variant='default',className=''}:any){const styles=variant==='secondary'?'bg-[#f3f4f6] text-[#111827] border border-[#e5e7eb]':variant==='outline'?'bg-white text-[#111827] border border-[#e5e7eb]':'bg-[#111827] text-white'; return <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs ${styles} ${className}`}>{children}</span>}
