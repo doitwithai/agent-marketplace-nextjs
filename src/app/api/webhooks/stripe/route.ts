@@ -1,0 +1,3 @@
+import {headers} from 'next/headers'; import {NextResponse} from 'next/server'; import Stripe from 'stripe'; import {getStripe} from '@/lib/stripe'
+export async function POST(req:Request){const stripe=getStripe(); const sig=(await headers()).get('stripe-signature'); const secret=process.env.STRIPE_WEBHOOK_SECRET; const body=await req.text(); if(!secret||!sig) return new NextResponse(null,{status:200}); try{const event=stripe.webhooks.constructEvent(body,sig,secret); console.log('[webhook]',event.type)}catch(e){console.error('verify fail',e); return new NextResponse(null,{status:400})} return new NextResponse(null,{status:200})}
+export const dynamic='force-dynamic'
